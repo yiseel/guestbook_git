@@ -1,6 +1,6 @@
 
 import './App.css';
-import Edit from './components/Edit';
+import EditCon from './components/Edit';
 import List from './components/List';
 import React, { useRef, useReducer, useMemo, useCallback, useEffect } from 'react';
 
@@ -52,35 +52,31 @@ function App() {
 
       dispatch({type: "INIT", data:initData})
   }
- //처음 시작할 때 api에 설정한 초기값을 불러옴
+
   useEffect(()=>{
     getData();
   },[]);
 
-
-  // 새로운 일기를 전달받음
   const onCreate = useCallback((author, content) => {
     dispatch ({type:"CREATE", data:{author, content, id:dataId.current}})
     dataId.current += 1;
   },[]);
 
-  // 기존 일기 삭제하기
   const onRemove = useCallback((targetId) =>{
     dispatch({type:'REMOVE' ,targetId})
   },[]);
 
     
   const memoizedDispatches = useMemo(()=>{
-    return [onCreate, onRemove]
-    //useMemo로 전달해야 하는 이유 : 재생성이 되지 않게 하기 위해
+    return {onCreate, onRemove}
   },[]);
 
   return (
     <DiaryStateContext.Provider value={data}>
       <DiaryDispatchContext.Provider value={memoizedDispatches}>
         <div className="App">
-          <Edit onCreate={onCreate}/>
-          <List onRemove={onRemove}/>
+          <EditCon/>
+          <List/>
         </div>
       </DiaryDispatchContext.Provider>
     </DiaryStateContext.Provider>

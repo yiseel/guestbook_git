@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
-import { DiaryDispatchContet } from '../App';
+import { DiaryDispatchContext } from '../App';
 
-const item = ({ author, content, created_date, onRemove, id }) => {
+const Item = ({ author, content, created_date, id }) => {
     
-    // const {onRemove} = useContext(DiaryDispatchContet);
+    const {onRemove} = useContext(DiaryDispatchContext);
     
 
     const handleRemove = () =>{
-        if(window.confirm(`${id}번째 일기를 정말 삭제하시겠습니까?`)){
+        if(window.confirm(`${id}번째 글을 삭제하시겠습니까?`)){
             onRemove(id);
         }
     }
@@ -28,4 +28,4 @@ const item = ({ author, content, created_date, onRemove, id }) => {
     )
 }
 
-export default item;
+export default Item;

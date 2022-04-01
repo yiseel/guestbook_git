@@ -1,9 +1,9 @@
 import React, { useState, useRef, useContext } from 'react';
 import { DiaryDispatchContext } from '../App';
 
-const Edit = ({onCreate}) => {
+const EditCon = () => {
 
-    // const {onCreate} = useContext(DiaryDispatchContext);
+    const {onCreate} = useContext(DiaryDispatchContext);
 
     const [state, setState] = useState({
         author : "",
@@ -15,7 +15,7 @@ const Edit = ({onCreate}) => {
         setState({
             ...state,
             [e.target.name]: e.target.value,
-        })
+        })    
     }
 
     const authorInput = useRef();
@@ -38,7 +38,6 @@ const Edit = ({onCreate}) => {
         setState({ //초기화
             author : "",
             content : "",
-            emotion : 1.
         });
     }
 
@@ -72,4 +71,4 @@ const Edit = ({onCreate}) => {
     );
 };
 
-export default Edit;
+export default EditCon;
